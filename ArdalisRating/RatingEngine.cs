@@ -16,16 +16,19 @@ namespace ArdalisRating
 
         public ConsoleLogger Logger { get; set; } = new ConsoleLogger();
 
+        public FilePolicySource FilePolicySource { get; set; } = new FilePolicySource();
+
+        public PolicySerializer PolicySerializer { get; set; } = new PolicySerializer();
+
         public void Rate()
         {
             Logger.Log("Starting rate.");
             Logger.Log("Loading policy.");
 
             // load policy - open file policy.json
-            string policyJson = File.ReadAllText("policy.json");
+            string policyJson = FilePolicySource.GetPolicyFromSource();
 
-            var policy = JsonConvert.DeserializeObject<Policy>(policyJson,
-                new StringEnumConverter());
+            var policy = PolicySerializer.GetPolicyFromJsonString(policyJson);
 
             switch (policy.Type)
             {
