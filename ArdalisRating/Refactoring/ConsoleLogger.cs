@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArdalisRating
+namespace ArdalisRating.Refactoring
 {
     public class ConsoleLogger
     {
         public void Log(string message)
         {
-            Logger.Log(message);
+            Console.WriteLine(message);
         }
     }
 }
