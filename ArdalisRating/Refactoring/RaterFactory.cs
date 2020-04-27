@@ -8,19 +8,15 @@ namespace ArdalisRating.Refactoring
     {
         public Rater Create(Policy policy, RatingEngine engine)
         {
-            switch (policy.Type)
+            try
             {
-                case PolicyType.Auto:
-                    return new AutoPolicyRater(engine.Logger, engine);
-
-                case PolicyType.Land:
-                    return new LandPolicyRater(engine.Logger, engine);
-
-                case PolicyType.Life:
-                    return new LifePolicyRater(engine.Logger, engine);
-
-                default:
-                    return new UnknownPolicyRater(engine.Logger, engine);
+                return (Rater)Activator.CreateInstance(
+                    Type.GetType($"ArdalisRating.Refactoring.{policy.Type}PolicyRater"),
+                    new object[] { engine.Logger, engine });
+            }
+            catch
+            {
+                return null;
             }
         }
     }
