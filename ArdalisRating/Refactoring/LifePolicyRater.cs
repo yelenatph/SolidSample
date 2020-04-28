@@ -6,7 +6,7 @@ namespace ArdalisRating.Refactoring
 {
     public class LifePolicyRater : Rater
     {
-        public LifePolicyRater(ConsoleLogger logger, RatingEngine engine) : base(logger, engine)
+        public LifePolicyRater(IRatingContext context) : base(context)
         {
         }
         public override void Rate(Policy policy)
@@ -45,10 +45,11 @@ namespace ArdalisRating.Refactoring
 
             if (policy.IsSmoker)
             {
-                _engine.Rating = baseRate * 2;
+                _context.UpdateRating(baseRate * 2);
+                return;
             }
 
-            _engine.Rating = baseRate;
+            _context.UpdateRating(baseRate);
         }
     }
 }

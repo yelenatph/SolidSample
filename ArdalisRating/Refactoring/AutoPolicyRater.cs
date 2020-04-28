@@ -6,7 +6,7 @@ namespace ArdalisRating.Refactoring
 {
     public class AutoPolicyRater : Rater
     {
-        public AutoPolicyRater(ConsoleLogger logger, RatingEngine engine) : base(logger, engine)
+        public AutoPolicyRater(IRatingContext context) : base(context)
         {
         }
 
@@ -16,7 +16,7 @@ namespace ArdalisRating.Refactoring
             _logger.Log("Validating policy.");
 
             if (String.IsNullOrEmpty(policy.Make))
-            {
+            {   
                 _logger.Log("Auto policy must specify Make");
                 return;
             }
@@ -25,10 +25,10 @@ namespace ArdalisRating.Refactoring
             {
                 if (policy.Deductible < 500)
                 {
-                    _engine.Rating = 1000m;
+                    _context.UpdateRating(1000m);
                 }
 
-                _engine.Rating = 900m;
+                _context.UpdateRating(900m);
             }
         }
     }

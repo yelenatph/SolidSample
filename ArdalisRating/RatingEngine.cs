@@ -14,27 +14,28 @@ namespace ArdalisRating
     {
         public decimal Rating { get; set; }
 
-        public ConsoleLogger Logger { get; set; } = new ConsoleLogger();
+        public IRatingContext Context { get; set; } = new DefaultRatingContext();
 
-        public FilePolicySource FilePolicySource { get; set; } = new FilePolicySource();
-
-        public PolicySerializer PolicySerializer { get; set; } = new PolicySerializer();
+        public RatingEngine()
+        {
+            Context.Engine = this;
+        }
 
         public void Rate()
         {
-            Logger.Log("Starting rate.");
-            Logger.Log("Loading policy.");
+            Context.Log("Starting rate.");
+            Context.Log("Loading policy.");
 
             // load policy - open file policy.json
-            string policyJson = FilePolicySource.GetPolicyFromSource();
+            string policyJson = Context.LoadPolicyFromFile();
 
-            var policy = PolicySerializer.GetPolicyFromJsonString(policyJson);
+            var policy = Context.GetPolicyFromJsonString(policyJson);
 
-            var factory = new RaterFactory();
-            var rater = factory.Create(policy, this);
+            var rater = Context.CreateRaterForPolicy(policy, Context);
+
             rater.Rate(policy);
 
-            Logger.Log("Rating completed.");
+            Context.Log("Rating completed.");
         }
     }
 }

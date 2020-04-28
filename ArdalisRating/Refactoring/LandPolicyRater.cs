@@ -6,7 +6,7 @@ namespace ArdalisRating.Refactoring
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(ConsoleLogger logger, RatingEngine engine) : base(logger, engine)
+        public LandPolicyRater(IRatingContext context) : base(context)
         {
         }
 
@@ -27,7 +27,7 @@ namespace ArdalisRating.Refactoring
                 return;
             }
 
-            _engine.Rating = policy.BondAmount * 0.05m;
+            _context.UpdateRating(policy.BondAmount * 0.05m);
         }
     }
 }

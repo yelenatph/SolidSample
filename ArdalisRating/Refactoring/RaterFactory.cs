@@ -6,17 +6,17 @@ namespace ArdalisRating.Refactoring
 {
     public class RaterFactory
     {
-        public Rater Create(Policy policy, RatingEngine engine)
+        public Rater Create(Policy policy, IRatingContext context)
         {
             try
             {
                 return (Rater)Activator.CreateInstance(
                     Type.GetType($"ArdalisRating.Refactoring.{policy.Type}PolicyRater"),
-                    new object[] { engine.Logger, engine });
+                    new object[] { context });
             }
             catch
             {
-                return new UnknownPolicyRater(engine.Logger, engine);
+                return new UnknownPolicyRater(context);
             }
         }
     }
