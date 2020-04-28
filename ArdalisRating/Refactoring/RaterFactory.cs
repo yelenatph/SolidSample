@@ -16,7 +16,7 @@ namespace ArdalisRating.Refactoring
             }
             catch
             {
-                return null;
+                return new UnknownPolicyRater(engine.Logger, engine);
             }
         }
     }
