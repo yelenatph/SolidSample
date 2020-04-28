@@ -2,6 +2,7 @@
 
 namespace ArdalisRating
 {
+
     public interface IRatingContext : ILogger
     {
         string LoadPolicyFromFile();
@@ -10,7 +11,5 @@ namespace ArdalisRating
         Policy GetPolicyFromXmlString(string policyXml);
         Rater CreateRaterForPolicy(Policy policy, IRatingContext context);
         RatingEngine Engine { get; set; }
-        ConsoleLogger Logger { get; }
-        void UpdateRating(decimal rating);
     }
 }

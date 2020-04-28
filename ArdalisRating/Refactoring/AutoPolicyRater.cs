@@ -6,7 +6,7 @@ namespace ArdalisRating.Refactoring
 {
     public class AutoPolicyRater : Rater
     {
-        public AutoPolicyRater(IRatingContext context) : base(context)
+        public AutoPolicyRater(IRatingUpdater ratingUpdater) : base(ratingUpdater)
         {
         }
 
@@ -25,10 +25,11 @@ namespace ArdalisRating.Refactoring
             {
                 if (policy.Deductible < 500)
                 {
-                    _context.UpdateRating(1000m);
+                    _ratingUpdater.UpdateRating(1000m);
+                    return;
                 }
 
-                _context.UpdateRating(900m);
+                _ratingUpdater.UpdateRating(900m);
             }
         }
     }

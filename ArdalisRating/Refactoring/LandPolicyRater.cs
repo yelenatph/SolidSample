@@ -6,7 +6,7 @@ namespace ArdalisRating.Refactoring
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(IRatingContext context) : base(context)
+        public LandPolicyRater(IRatingUpdater ratingUpdater) : base(ratingUpdater)
         {
         }
 
@@ -27,7 +27,7 @@ namespace ArdalisRating.Refactoring
                 return;
             }
 
-            _context.UpdateRating(policy.BondAmount * 0.05m);
+            _ratingUpdater.UpdateRating(policy.BondAmount * 0.05m);
         }
     }
 }

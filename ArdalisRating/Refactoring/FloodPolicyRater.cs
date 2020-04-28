@@ -2,8 +2,7 @@
 {
     public class FloodPolicyRater : Rater
     {
-        public FloodPolicyRater(IRatingContext context)
-            : base(context)
+        public FloodPolicyRater(IRatingUpdater ratingUpdater) : base(ratingUpdater)
         {
         }
 
@@ -37,7 +36,7 @@
             {
                 multiple = 1.1m;
             }
-            _context.UpdateRating(policy.BondAmount * 0.05m * multiple);
+            _ratingUpdater.UpdateRating(policy.BondAmount * 0.05m * multiple);
         }
     }
 }

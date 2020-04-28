@@ -7,11 +7,11 @@ namespace ArdalisRating.Refactoring
     public abstract class Rater
     {
         public ILogger Logger { get; set; } = new ConsoleLogger();
-        protected readonly IRatingContext _context;
+        protected readonly IRatingUpdater _ratingUpdater;
 
-        public Rater(IRatingContext context)
+        public Rater(IRatingUpdater ratingUpdater)
         {
-            _context = context;
+            _ratingUpdater = ratingUpdater;
         }
 
         public abstract void Rate(Policy policy);
