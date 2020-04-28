@@ -6,12 +6,11 @@ namespace ArdalisRating.Refactoring
 {
     public abstract class Rater
     {
-        protected readonly ConsoleLogger _logger;
+        public ILogger Logger { get; set; } = new ConsoleLogger();
         protected readonly IRatingContext _context;
 
         public Rater(IRatingContext context)
         {
-            _logger = context.Logger;
             _context = context;
         }
 
