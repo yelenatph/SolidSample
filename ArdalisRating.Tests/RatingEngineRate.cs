@@ -10,6 +10,7 @@ namespace ArdalisRating.Tests
 [Fact]
 public void ReturnsRatingOf10000For200000LandPolicy()
 {
+ 
     var policy = new Policy
     {
         Type = PolicyType.Land,

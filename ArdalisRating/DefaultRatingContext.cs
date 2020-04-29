@@ -5,16 +5,27 @@ namespace ArdalisRating
 {
     public class DefaultRatingContext : IRatingContext
     {
+        private readonly IFilePolicySource _policySource;
+        private readonly IPolicySerializer _policySerializer;
+        private readonly IRaterFactory _raterFactory;
+
         public RatingEngine Engine { get; set; }
 
-        public Rater CreateRaterForPolicy(Policy policy, IRatingContext context)
+        public DefaultRatingContext(IFilePolicySource policySource, IPolicySerializer policySerializer, IRaterFactory raterFactory)
         {
-            return new RaterFactory().Create(policy, context);
+            _policySource = policySource;
+            _policySerializer = policySerializer;
+            _raterFactory = raterFactory;
+        }
+
+        public Rater CreateRaterForPolicy(Policy policy)
+        {
+            return _raterFactory.Create(policy);
         }
 
         public Policy GetPolicyFromJsonString(string policyJson)
         {
-            return new PolicySerializer().GetPolicyFromJsonString(policyJson);
+            return _policySerializer.GetPolicyFromJsonString(policyJson);
         }
 
         public Policy GetPolicyFromXmlString(string policyXml)
@@ -24,7 +35,7 @@ namespace ArdalisRating
 
         public string LoadPolicyFromFile()
         {
-            return new FilePolicySource().GetPolicyFromSource();
+            return _policySource.GetPolicyFromSource();
         }
 
         public string LoadPolicyFromURI(string uri)

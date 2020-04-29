@@ -9,7 +9,7 @@ namespace ArdalisRating
         string LoadPolicyFromURI(string uri);
         Policy GetPolicyFromJsonString(string policyJson);
         Policy GetPolicyFromXmlString(string policyXml);
-        Rater CreateRaterForPolicy(Policy policy, IRatingContext context);
+        Rater CreateRaterForPolicy(Policy policy);
         RatingEngine Engine { get; set; }
     }
 }

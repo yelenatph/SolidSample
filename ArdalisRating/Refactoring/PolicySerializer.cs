@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ArdalisRating.Refactoring
 {
-    public class PolicySerializer
+    public class PolicySerializer : IPolicySerializer
     {
         public Policy GetPolicyFromJsonString(string jsonString)
         {

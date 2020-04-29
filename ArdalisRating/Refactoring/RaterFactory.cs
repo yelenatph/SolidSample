@@ -4,19 +4,26 @@ using System.Text;
 
 namespace ArdalisRating.Refactoring
 {
-    public class RaterFactory
+    public class RaterFactory : IRaterFactory
     {
-        public Rater Create(Policy policy, IRatingContext context)
+        private readonly ILogger _logger;
+
+        public RaterFactory(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        public Rater Create(Policy policy)
         {
             try
             {
                 return (Rater)Activator.CreateInstance(
                     Type.GetType($"ArdalisRating.Refactoring.{policy.Type}PolicyRater"),
-                    new object[] { new RatingUpdater(context.Engine) });
+                    new object[] { _logger });
             }
             catch
             {
-                return new UnknownPolicyRater(new RatingUpdater(context.Engine));
+                return new UnknownPolicyRater(_logger);
             }
         }
     }
