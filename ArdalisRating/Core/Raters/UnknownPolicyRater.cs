@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArdalisRating.Refactoring
+namespace ArdalisRating
 {
     public class UnknownPolicyRater : Rater
     {

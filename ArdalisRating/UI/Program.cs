@@ -1,5 +1,4 @@
-﻿using ArdalisRating.Refactoring;
-using System;
+﻿using System;
 
 namespace ArdalisRating
 {
@@ -8,8 +7,8 @@ namespace ArdalisRating
         static void Main(string[] args)
         {
             Console.WriteLine("Ardalis Insurance Rating System Starting...");
-            // var logger = new ConsoleLogger();
-            var logger = new FileLogger();
+             var logger = new ConsoleLogger();
+           // var logger = new FileLogger();
 
             var engine = new RatingEngine(
                 logger,

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArdalisRating.Refactoring
+namespace ArdalisRating
 {
     public class PolicySerializer : IPolicySerializer
     {

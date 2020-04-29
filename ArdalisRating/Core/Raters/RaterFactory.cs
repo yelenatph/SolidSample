@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArdalisRating.Refactoring
+namespace ArdalisRating
 {
-    public class RaterFactory : IRaterFactory
+    public class RaterFactory
     {
         private readonly ILogger _logger;
 
@@ -18,7 +18,7 @@ namespace ArdalisRating.Refactoring
             try
             {
                 return (Rater)Activator.CreateInstance(
-                    Type.GetType($"ArdalisRating.Refactoring.{policy.Type}PolicyRater"),
+                    Type.GetType($"ArdalisRating.{policy.Type}PolicyRater"),
                     new object[] { _logger });
             }
             catch

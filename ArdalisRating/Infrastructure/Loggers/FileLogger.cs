@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ArdalisRating.Refactoring
-{
+namespace ArdalisRating
+{ 
     public class FileLogger : ILogger
     {
         public void Log(string message)

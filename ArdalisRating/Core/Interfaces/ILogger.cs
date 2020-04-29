@@ -1,4 +1,4 @@
-﻿namespace ArdalisRating.Refactoring
+﻿namespace ArdalisRating
 {
     public interface ILogger
     {
