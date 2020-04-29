@@ -16,24 +16,20 @@ namespace ArdalisRating
         private readonly IFilePolicySource _policySource;
 
         private readonly IPolicySerializer _policySerializer;
-        private readonly IRaterFactory _raterFactory;
+        private readonly RaterFactory _raterFactory;
 
         public decimal Rating { get; set; }
-
-        public IRatingContext Context { get; set; }
 
         public RatingEngine(
             ILogger logger, 
             IFilePolicySource policySource, 
             IPolicySerializer policySerializer,
-            IRaterFactory raterFactory)
+            RaterFactory raterFactory)
         {
             _logger = logger;
             _policySource = policySource;
             _policySerializer = policySerializer;
             _raterFactory = raterFactory;
-            Context = new DefaultRatingContext(_policySource, _policySerializer, _raterFactory);
-            Context.Engine = this;
         }
 
         public void Rate()
@@ -48,9 +44,8 @@ namespace ArdalisRating
 
             var rater = _raterFactory.Create(policy);
 
-            var result = rater.Rate(policy);
+            Rating = rater.Rate(policy);
 
-            _logger.Log($"Rate is {result}");
             _logger.Log("Rating completed.");
         }
     }
